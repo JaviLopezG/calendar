@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { initializeApp } from "firebase/app";
 import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, setDoc, onSnapshot, updateDoc } from "firebase/firestore";
-import { Printer, X, Plus, Trash2, Settings, Lock, Users, Link as LinkIcon, Loader2, Edit3, Check } from 'lucide-react';
+import { Printer, X, Plus, Trash2, Settings, Lock, Users, Link as LinkIcon, Loader2, Edit3, Check, Calendar } from 'lucide-react';
 
 // --- CONFIGURACIÓN FIREBASE ---
 const firebaseConfig = {
@@ -52,6 +52,9 @@ const App = () => {
   
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [tempTitle, setTempTitle] = useState('');
+  
+  // Estado local para el cambio de año en ajustes
+  const [yearInput, setYearInput] = useState('');
 
   // 1. AUTH & TIMEOUT
   useEffect(() => {
@@ -109,7 +112,10 @@ const App = () => {
 
     const unsub = onSnapshot(docRef, (snap) => {
       if (snap.exists()) {
-        setCalendarData(snap.data());
+        const data = snap.data();
+        setCalendarData(data);
+        // Set year input default value when data loads
+        if (!settingsOpen) setYearInput(data.year || 2026);
         localStorage.setItem('fixed_planner_id', calendarId);
         setAuthError(null);
       } else {
@@ -129,11 +135,18 @@ const App = () => {
 
   const createNewCalendar = async (forceId = null) => {
     if (!user) return;
+    
+    // Lógica del año por defecto
+    const now = new Date();
+    // Si estamos en Diciembre (mes 11), crear año siguiente, si no, año actual.
+    const defaultYear = now.getMonth() === 11 ? now.getFullYear() + 1 : now.getFullYear();
+    
     const newId = forceId || Math.random().toString(36).substring(2, 9);
     const defaultData = {
       ownerId: user.uid,
       isPublic: false,
-      title: "2026 Year Planner",
+      year: defaultYear,
+      title: `${defaultYear} Year Planner`,
       createdAt: new Date().toISOString(),
       events: {}
     };
@@ -160,6 +173,58 @@ const App = () => {
     if (calendarData.ownerId !== user.uid) return;
     const docRef = doc(db, 'artifacts', appId, 'public', 'data', COLLECTION_NAME, calendarId);
     await updateDoc(docRef, { isPublic: !calendarData.isPublic });
+  };
+
+  const updateYear = async () => {
+    if (calendarData.ownerId !== user.uid) return;
+    const newYear = parseInt(yearInput);
+    
+    // Validación: Año 2000+
+    if (isNaN(newYear) || newYear < 2000) {
+      alert("Please enter a valid year (2000 or later).");
+      return;
+    }
+
+    if (newYear === calendarData.year) return; // No hay cambios
+
+    // MIGRACIÓN DE EVENTOS
+    // Recorremos todos los eventos antiguos y actualizamos su clave YYYY-M-D al nuevo año
+    const oldEvents = calendarData.events || {};
+    const newEvents = {};
+    const oldYearPrefix = `${calendarData.year || 2026}-`;
+    const newYearPrefix = `${newYear}-`;
+
+    Object.keys(oldEvents).forEach(key => {
+      // Si la clave empieza por el año viejo, la reemplazamos
+      // Si por alguna razón la clave no tiene el formato esperado, intentamos preservarla
+      if (key.startsWith(oldYearPrefix)) {
+        const suffix = key.substring(oldYearPrefix.length); // M-D
+        newEvents[`${newYearPrefix}${suffix}`] = oldEvents[key];
+      } else {
+        // Fallback para claves extrañas, intentar parsear o descartar
+        // Asumimos formato YYYY-M-D. Si el año no coincide, podría ser basura o de otra migración
+        // Para seguridad, intentamos reconstruir:
+        const parts = key.split('-');
+        if (parts.length === 3) {
+            newEvents[`${newYear}-${parts[1]}-${parts[2]}`] = oldEvents[key];
+        }
+      }
+    });
+
+    const docRef = doc(db, 'artifacts', appId, 'public', 'data', COLLECTION_NAME, calendarId);
+    
+    // Actualizamos año y eventos migrados. Opcional: actualizamos título si contiene el año viejo
+    let newTitle = calendarData.title;
+    if (newTitle.includes(String(calendarData.year))) {
+        newTitle = newTitle.replace(String(calendarData.year), String(newYear));
+    }
+
+    await updateDoc(docRef, { 
+        year: newYear,
+        events: newEvents,
+        title: newTitle
+    });
+    setSettingsOpen(false);
   };
 
   const saveEvent = async () => {
@@ -193,13 +258,14 @@ const App = () => {
 
   const generateMonths = () => {
     const months = Array.from({ length: 12 }, () => []);
-    const year = 2026;
+    // Usar el año guardado o 2026 por defecto (para calendarios viejos)
+    const year = calendarData?.year || 2026; 
     const eventMap = calendarData?.events || {};
 
     for (let month = 0; month < 12; month++) {
       const daysInMonth = new Date(year, month + 1, 0).getDate();
       for (let day = 1; day <= daysInMonth; day++) {
-        const dateKey = `2026-${month}-${day}`;
+        const dateKey = `${year}-${month}-${day}`;
         const date = new Date(year, month, day);
         const dayOfWeek = date.getDay();
         
@@ -295,6 +361,7 @@ const App = () => {
 
   const isOwner = calendarData?.ownerId === user?.uid;
   const canEdit = isOwner || calendarData?.isPublic;
+  const currentYear = calendarData?.year || 2026;
   const allMonths = generateMonths();
 
   return (
@@ -318,8 +385,8 @@ const App = () => {
                   <button onClick={saveTitle} className="bg-green-500 text-white p-1 rounded hover:bg-green-600"><Check size={16} /></button>
                 </div>
               ) : (
-                <h1 className="text-lg font-bold flex items-center gap-2 group cursor-pointer" onClick={() => { if(isOwner){ setTempTitle(calendarData.title || "2026 Planner"); setIsEditingTitle(true); }}}>
-                  {calendarData.title || "2026 Planner"}
+                <h1 className="text-lg font-bold flex items-center gap-2 group cursor-pointer" onClick={() => { if(isOwner){ setTempTitle(calendarData.title || `${currentYear} Planner`); setIsEditingTitle(true); }}}>
+                  {calendarData.title || `${currentYear} Planner`}
                   {isOwner && <Edit3 size={14} className="opacity-0 group-hover:opacity-100 text-slate-400" />}
                 </h1>
               )}
@@ -332,7 +399,10 @@ const App = () => {
           <div className="flex gap-2">
             {isOwner && (
               <button 
-                onClick={() => setSettingsOpen(true)}
+                onClick={() => {
+                    setYearInput(calendarData.year || 2026);
+                    setSettingsOpen(true);
+                }}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs border transition ${calendarData.isPublic ? 'bg-green-50 text-green-700 border-green-200' : 'bg-slate-100 text-slate-600 border-slate-200'}`}
               >
                 {calendarData.isPublic ? <Users size={14} /> : <Lock size={14} />}
@@ -353,7 +423,7 @@ const App = () => {
       <div className="flex justify-center pb-10 print:hidden">
         <div className="bg-white w-full max-w-[210mm] shadow-lg">
            <div className="text-center py-4 border-b border-slate-100">
-             <h2 className="text-xl font-bold text-slate-700 uppercase tracking-widest">{calendarData.title || "2026 Planner"}</h2>
+             <h2 className="text-xl font-bold text-slate-700 uppercase tracking-widest">{calendarData.title || `${currentYear} Planner`}</h2>
            </div>
            <div className="grid grid-cols-6 border-l border-b border-slate-300">
               {Array.from({ length: 6 }).map((_, colIndex) => {
@@ -374,11 +444,10 @@ const App = () => {
       <div className="hidden print:block">
         
         {/* Page 1 */}
-        {/* Usamos padding en lugar de margin externo para evitar overflow. w-full + padding = 210mm total width */}
         <div className="w-full h-[297mm] px-[10mm] py-[10mm] bg-white break-after-page box-border overflow-hidden">
             <div className="text-center mb-1">
                 <h1 className="text-xl font-bold uppercase tracking-widest text-slate-800">
-                {calendarData.title || "2026 Planner"} <span className="text-sm text-slate-400">(Jan - Jun)</span>
+                {calendarData.title || `${currentYear} Planner`} <span className="text-sm text-slate-400">(Jan - Jun)</span>
                 </h1>
             </div>
             <div className="grid grid-cols-6 border-l border-t border-slate-300">
@@ -396,7 +465,7 @@ const App = () => {
         <div className="w-full h-[297mm] px-[10mm] py-[10mm] bg-white box-border overflow-hidden">
             <div className="text-center mb-1">
                 <h1 className="text-xl font-bold uppercase tracking-widest text-slate-800">
-                {calendarData.title || "2026 Planner"} <span className="text-sm text-slate-400">(Jul - Dec)</span>
+                {calendarData.title || `${currentYear} Planner`} <span className="text-sm text-slate-400">(Jul - Dec)</span>
                 </h1>
             </div>
             <div className="grid grid-cols-6 border-l border-t border-slate-300">
@@ -417,7 +486,7 @@ const App = () => {
         <div className="fixed inset-0 bg-black/20 flex items-center justify-center z-50 no-print backdrop-blur-[1px]" onClick={() => setModalOpen(false)}>
           <div className="bg-white rounded-lg shadow-xl w-80 overflow-hidden border border-slate-200" onClick={e => e.stopPropagation()}>
             <div className="p-3 bg-slate-50 border-b flex justify-between items-center">
-              <span className="font-bold text-sm text-slate-700">{selectedDate.day} {monthColors[selectedDate.month].full}</span>
+              <span className="font-bold text-sm text-slate-700">{selectedDate.day} {monthColors[selectedDate.month].full} {currentYear}</span>
               <button onClick={() => setModalOpen(false)}><X size={16} className="text-slate-400" /></button>
             </div>
             <div className="p-3 max-h-60 overflow-y-auto">
@@ -444,7 +513,35 @@ const App = () => {
         <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 no-print" onClick={() => setSettingsOpen(false)}>
           <div className="bg-white rounded-xl shadow-2xl p-6 w-96 max-w-full" onClick={e => e.stopPropagation()}>
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2"><Settings size={20} /> Settings</h2>
+            
             <div className="space-y-4">
+                {/* Year Setting */}
+                <div className="p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
+                    <h3 className="font-semibold text-sm mb-2 text-slate-700 flex items-center gap-2">
+                      <Calendar size={16} /> Calendar Year
+                    </h3>
+                    <div className="flex gap-2 items-center">
+                      <input 
+                        type="number" 
+                        min="2000"
+                        className="border border-slate-300 rounded px-3 py-1.5 text-sm w-24 outline-none focus:ring-2 focus:ring-blue-500"
+                        value={yearInput}
+                        onChange={(e) => setYearInput(e.target.value)}
+                      />
+                      <button 
+                        onClick={updateYear}
+                        disabled={parseInt(yearInput) === calendarData.year}
+                        className="bg-slate-800 text-white px-3 py-1.5 rounded text-sm hover:bg-black disabled:opacity-50"
+                      >
+                        Update Year
+                      </button>
+                    </div>
+                    <p className="text-[11px] text-slate-500 mt-2 leading-tight">
+                        Warning: Updating the year will move all existing events to the new dates.
+                    </p>
+                </div>
+
+                {/* Privacy Setting */}
                 <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
                     <h3 className="font-semibold text-sm mb-2 text-slate-700">Privacy</h3>
                     <div className="flex gap-2 mb-2">
