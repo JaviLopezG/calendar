@@ -72,14 +72,12 @@ The Collaborative Annual Planner is designed to be simple and intuitive. Here ar
 
 ### Architecture
 
-<pre>
 ```mermaid
 graph TD
     A[User] --> B{React App};
     B --> C[Firebase Firestore];
     C -- Real-time updates --> B;
 ```
-</pre>
 
 ## 🗺️ Roadmap
 
