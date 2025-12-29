@@ -1,0 +1,47 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # required for all-contributors to commit changes
+          token: ${{ secrets.GITHUB_TOKEN }} 
+
+      - name: Generate TOC
+        uses: technote-space/toc-generator@v4
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOC_TITLE: ""
+          COMMIT_MESSAGE: "docs: update TOC"
+
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --verbose --no-progress ./**/*.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: All Contributors
+        uses: all-contributors/actions@v1
+        with:
+          # The `.all-contributorsrc` file is created automatically
+          # if it does not exist.
+          configuration: ".all-contributorsrc"
+          commit: "docs: update contributors"
+          token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: automated documentation updates"
+          branch: main
+          file_pattern: "README.md .all-contributorsrc"
+

@@ -1,16 +1,84 @@
-# React + Vite
+<div align="center">
+<br />
+<pre>
+  ____        _ _           _             
+ / ___|  ___ | (_) ___ ___ | |__   ___ _ __ 
+| |     / _ \| | |/ __/ _ \| '_ \ / _ \ '__|
+| |___ | (_) | | | (_| (_) | |_) |  __/ |   
+ \____| \___/|_|_|\___\___/|_.__/ \___|_|   
+</pre>
+<br />
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Social Printable Calendar Planner
 
-Currently, two official plugins are available:
+[![Build Status](https://github.com/javi/calendar/actions/workflows/documentation.yml/badge.svg)](https://github.com/javi/calendar/actions/workflows/documentation.yml)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+![Version](https://img.shields.io/badge/version-0.0.0-blue)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/javi/calendar/badge)](https://api.securityscorecards.dev/projects/github.com/javi/calendar)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> A social and printable calendar planner.
 
-## React Compiler
+<!--TOC-->
+<!--/TOC-->
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Quick Start
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [Node.js](https://nodejs.org/) (v18+)
+- [Docker](https://www.docker.com/) (optional)
+
+### Local Development
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/javi/calendar.git
+    cd calendar
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+### Docker
+
+You can also run the development environment inside a Docker container.
+
+1.  **Build the image:**
+    ```bash
+    docker build -t calendar-dev .
+    ```
+
+2.  **Run the container:**
+    ```bash
+    docker run -p 5173:5173 -v .:/app calendar-dev
+    ```
+The application will be available at `http://localhost:5173`.
+
+## Usage
+
+<!-- Add usage instructions and examples here. -->
+
+### Architecture
+
+```mermaid
+graph TD;
+    A[User] -->|Interacts with| B(React UI);
+    B -->|Fetches data from| C(Firebase);
+    C -->|Stores calendar data| D[Firestore];
+```
+
+## Contributing
+
+Contributions are welcome! This project uses the [All Contributors](https://allcontributors.org/) specification. Contributions of any kind are welcome!
+
+## License
+
+This project is licensed under the BSD-3-Clause License - see the [LICENSE](LICENSE) file for details.
