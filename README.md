@@ -1,15 +1,18 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
 
-- [👥🖨️🗓️✒️](#)
-- [Social Printable Calendar Planner](#social-printable-calendar-planner)
-  - [Quick Start](#quick-start)
-    - [Prerequisites](#prerequisites)
-    - [Local Development](#local-development)
+- [Collaborative Calendar](#collaborative-calendar)
+  - [✨ Features](#-features)
+  - [🚀 Quick Start](#-quick-start)
+    - [Installation](#installation)
     - [Docker](#docker)
-  - [Usage](#usage)
-    - [Architecture](#architecture)
-  - [License](#license)
+  - [📦 Dependencies](#-dependencies)
+  - [📖 Usage](#-usage)
+  - [🗺️ Roadmap](#-roadmap)
+  - [🤖 Automation](#-automation)
+  - [🤝 Contributing](#-contributing)
+  - [📝 License](#-license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
