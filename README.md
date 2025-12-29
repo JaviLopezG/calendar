@@ -21,10 +21,10 @@
   A simple, collaborative calendar for planning and sharing events.
 </div>
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/{YOUR_USERNAME}/{YOUR_REPOSITORY}/documentation.yml?branch=main&style=for-the-badge)](https://github.com/{YOUR_USERNAME}/{YOUR_REPOSITORY}/actions/workflows/documentation.yml)
-[![License](https://img.shields.io/github/license/{YOUR_USERNAME}/{YOUR_REPOSITORY}?style=for-the-badge)](LICENSE)
-[![Version](https://img.shields.io/github/package-json/v/{YOUR_USERNAME}/{YOUR_REPOSITORY}?style=for-the-badge)](package.json)
-[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/{YOUR_USERNAME}/{YOUR_REPOSITORY}?style=for-the-badge)](https://openssf.org/projects/scorecard/)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/JaviLopezG/calendar/documentation.yml?branch=main&style=for-the-badge)](https://github.com/JaviLopezG/calendar/actions/workflows/documentation.yml)
+[![License](https://img.shields.io/github/license/JaviLopezG/calendar?style=for-the-badge)](LICENSE)
+[![Version](https://img.shields.io/github/package-json/v/JaviLopezG/calendar?style=for-the-badge)](package.json)
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/JaviLopezG/calendar?style=for-the-badge)](https://openssf.org/projects/scorecard/)
 
 This project is a collaborative calendar that allows you to create a planner for any year. The cool thing is that it is a collaborative tool, you can share the link with other people and let them see the calendar or make it public to allow anyone with the link to modify the calendar. It updates in realtime (uses firestore) and don't require logins or any identifications.
 

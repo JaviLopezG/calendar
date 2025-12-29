@@ -9,6 +9,8 @@ jobs:
   toc:
     name: TOC Generator
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - name: TOC Generator
@@ -16,7 +18,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TOC_TITLE: "## Table of Contents"
-          TOC_TARGET_FILE: "README.md"
+          TARGET_PATHS: "README.md"
 
   links:
     name: Link Checker
@@ -27,7 +29,7 @@ jobs:
         uses: lycheeverse/lychee-action@v1
         with:
           args: --verbose --no-progress './**/*.md' './**/*.html'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   contributors:
     name: All Contributors
@@ -35,7 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: All Contributors
-        uses: all-contributors/all-contributors-cli@v6
+        uses: all-contributors/all-contributors-cli@v6.20.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           path: "README.md"
