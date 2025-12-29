@@ -117,6 +117,10 @@ This is a weekend project, and I will continue to work on it if there is enough 
 
 ## 🤖 Automation
 
+> [!WARNING]
+> The GitHub Actions workflows are currently not working. I am working on fixing them.
+
+
 This project uses GitHub Actions to automate the following tasks:
 
 -   **Automated TOC generation:** The table of contents is automatically updated using [toc-generator](https://github.com/technote-space/toc-generator).
@@ -129,39 +133,3 @@ This project uses GitHub Actions to automate the following tasks:
 Any help, suggestions, or feedback are welcome! Please feel free to open an issue or submit a pull request.
 
 ---
-
-<p align="center">
-  <a href="https://github.com/javi/calendar/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=javi/calendar" alt="Contributors">
-  </a>
-</p>
-## Contributors ✨
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Javi"><img src="https://avatars.githubusercontent.com/u/4081895?v=4?s=100" width="100px;" alt="Javier Casaubón"/><br /><sub><b>Javier Casaubón</b></sub></a><br /><a href="https://github.com/javilopezg/calendar/commits?author=Javi" title="Documentation">📖</a> <a href="https://github.com/javilopezg/calendar/commits?author=Javi" title="Code">💻</a></td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td align="center" size="13px" colspan="7">
-        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
-          <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
-        </img>
-      </td>
-    </tr>
-  </tfoot>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
