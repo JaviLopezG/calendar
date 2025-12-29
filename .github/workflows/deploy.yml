@@ -22,4 +22,6 @@ jobs:
       - name: Deploy to Firebase
         run: |
           npm install -g firebase-tools
-          firebase deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }} --project calendar-yups-me
+          firebase deploy --only hosting --project calendar-yups-me
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
