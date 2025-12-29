@@ -24,7 +24,7 @@
     <a href="https://github.com/javilopezg/calendar/actions/workflows/documentation.yml"><img src="https://github.com/javilopezg/calendar/actions/workflows/documentation.yml/badge.svg" alt="Build Status"></a>
     <a href="https://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/License-BSD--3--Clause-blue.svg" alt="License"></a>
     <a href="package.json"><img src="https://img.shields.io/github/package-json/v/javilopezg/calendar" alt="Version"></a>
-    <a href="https://securityscorecards.dev/viewer/?uri=github.com/javilopezg/calendar"><img src="https://api.securityscorecards.dev/projects/github.com/javilopezg/calendar/badge" alt="OpenSSF Scorecard"></a>
+    <a href="https://securityscorecards.dev/viewer/?uri=github.com/JaviLopezG/calendar"><img src="https://api.securityscorecards.dev/projects/github.com/JaviLopezG/calendar/badge" alt="OpenSSF Scorecard"></a>
   </p>
 </div>
 
@@ -72,12 +72,14 @@ The Collaborative Annual Planner is designed to be simple and intuitive. Here ar
 
 ### Architecture
 
+<pre>
 ```mermaid
 graph TD
     A[User] --> B{React App};
     B --> C[Firebase Firestore];
     C -- Real-time updates --> B;
 ```
+</pre>
 
 ## 🗺️ Roadmap
 
