@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Collaborative Annual Planner](#collaborative-annual-planner)
+  - [🚀 Quick Start](#-quick-start)
+  - [✨ Features](#-features)
+  - [📦 Dependencies](#-dependencies)
+  - [📖 Usage](#-usage)
+    - [Architecture](#architecture)
+  - [🗺️ Roadmap](#-roadmap)
+  - [❤️ Contributing](#-contributing)
+  - [📜 License](#-license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 <div align="center">
   <img src="logo.png" alt="Calendar Logo" width="200"/>
   <h1>Collaborative Annual Planner</h1>
