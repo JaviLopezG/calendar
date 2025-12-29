@@ -14,74 +14,74 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 <div align="center">
-<h1>👥🖨️🗓️✒️</h1>
+  <img src="logo.png" alt="logo" width="100"/>
+
+  # Collaborative Calendar
+
+  A simple, collaborative calendar for planning and sharing events.
 </div>
 
-# Social Printable Calendar Planner
+[![Build Status](https://img.shields.io/github/actions/workflow/status/{YOUR_USERNAME}/{YOUR_REPOSITORY}/documentation.yml?branch=main&style=for-the-badge)](https://github.com/{YOUR_USERNAME}/{YOUR_REPOSITORY}/actions/workflows/documentation.yml)
+[![License](https://img.shields.io/github/license/{YOUR_USERNAME}/{YOUR_REPOSITORY}?style=for-the-badge)](LICENSE)
+[![Version](https://img.shields.io/github/package-json/v/{YOUR_USERNAME}/{YOUR_REPOSITORY}?style=for-the-badge)](package.json)
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/{YOUR_USERNAME}/{YOUR_REPOSITORY}?style=for-the-badge)](https://openssf.org/projects/scorecard/)
 
-[![Build Status](https://github.com/JaviLopezG/calendar/actions/workflows/documentation.yml/badge.svg)](https://github.com/JaviLopezG/calendar/actions/workflows/documentation.yml)
-[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/JaviLopezG/calendar/badge)](https://api.securityscorecards.dev/projects/github.com/JaviLopezG/calendar)
+This project is a collaborative calendar that allows you to create a planner for any year. The cool thing is that it is a collaborative tool, you can share the link with other people and let them see the calendar or make it public to allow anyone with the link to modify the calendar. It updates in realtime (uses firestore) and don't require logins or any identifications.
 
-> A social and printable calendar planner.
+## ✨ Features
 
-<!--TOC-->
-<!--/TOC-->
+*   **Real-time collaboration:** Share your calendar with others and see changes in real-time.
+*   **No login required:** No need to create an account to use the app.
+*   **Public and private calendars:** Create public calendars that anyone can see and edit, or private calendars that only you and your collaborators can access.
+*   **Simple and intuitive interface:** The user interface is clean and easy to use.
 
-## Quick Start
+## 🚀 Quick Start
 
-### Prerequisites
+### Installation
 
-- [Node.js](https://nodejs.org/) (v18+)
-- [Docker](https://www.docker.com/) (optional)
-
-### Local Development
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/javi/calendar.git
-    cd calendar
-    ```
-
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-
-3.  **Run the development server:**
-    ```bash
-    npm run dev
-    ```
+```bash
+npm install
+```
 
 ### Docker
 
-You can also run the development environment inside a Docker container.
-
-1.  **Build the image:**
-    ```bash
-    docker build -t calendar-dev .
-    ```
-
-2.  **Run the container:**
-    ```bash
-    docker run -p 5173:5173 -v .:/app calendar-dev
-    ```
-The application will be available at `http://localhost:5173`.
-
-## Usage
-
-<!-- Add usage instructions and examples here. -->
-
-### Architecture
-
-```mermaid
-graph TD;
-    A[User] -->|Interacts with| B(React UI);
-    B -->|Fetches data from| C(Firebase);
-    C -->|Stores calendar data| D[Firestore];
+```bash
+docker build -t calendar .
+docker run -p 3000:3000 calendar
 ```
 
-## License
+## 📦 Dependencies
 
-This project is licensed under the BSD-3-Clause License - see the [LICENSE](LICENSE) file for details.
+*   [react](https://reactjs.org/)
+*   [firebase](https://firebase.google.com/)
+*   [tailwindcss](https://tailwindcss.com/)
+*   [vite](https://vitejs.dev/)
+
+## 📖 Usage
+
+To use the app, simply visit [calendar.yups.me](https://calendar.yups.me). You can create a new calendar by clicking on the "New Calendar" button. You can then share the link with others to collaborate.
+
+## 🗺️ Roadmap
+
+This is a weekend project and I'll work on it if I see interest. Here are some things I'm thinking of adding:
+
+*   [ ] Event reminders
+*   [ ] Different calendar views (week, month, year)
+*   [ ] Themes
+*   [ ] Mobile app
+
+## 🤖 Automation
+
+This project uses GitHub Actions to automate the following:
+
+*   **TOC generation:** The table of contents in this README is automatically generated using [toc-generator](https://github.com/technote-space/toc-generator).
+*   **Link checking:** All links in this README are automatically checked for validity using [Lychee](https://github.com/lycheeverse/lychee).
+*   **Contributor management:** The list of contributors to this project is automatically generated using [All-Contributors](https://allcontributors.org/).
+
+## 🤝 Contributing
+
+Any help, suggestions or feedback are welcome. Please, feel free to open an issue or a pull request.
+
+## 📝 License
+
+This project is licensed under the BSD 3-Clause license. See the [LICENSE](LICENSE) file for more details.

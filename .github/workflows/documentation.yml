@@ -6,47 +6,37 @@ on:
       - main
 
 jobs:
-  docs:
+  toc:
+    name: TOC Generator
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          # required for all-contributors to commit changes
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate TOC
+      - uses: actions/checkout@v3
+      - name: TOC Generator
         uses: technote-space/toc-generator@v4
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TOC_TITLE: ""
-          COMMIT_MESSAGE: "docs: update TOC"
+          TOC_TITLE: "## Table of Contents"
+          TOC_TARGET_FILE: "README.md"
 
+  links:
+    name: Link Checker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - name: Link Checker
         uses: lycheeverse/lychee-action@v1
         with:
-          args: --verbose --no-progress ./**/*.md
-        env:
+          args: --verbose --no-progress './**/*.md' './**/*.html'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  scorecard:
+  contributors:
+    name: All Contributors
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      id-token: write
-      actions: read
     steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
+      - name: All Contributors
+        uses: all-contributors/all-contributors-cli@v6
         with:
-          persist-credentials: false
-
-      - name: "Run OSSF Scorecard"
-        uses: ossf/scorecard-action@v2.4.3
-        with:
-          results_file: results.sarif
-          results_format: sarif
-          publish_results: true
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: "README.md"
+          commit_message: "docs: update contributors"
