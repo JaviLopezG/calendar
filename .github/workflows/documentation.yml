@@ -6,38 +6,26 @@ on:
       - main
 
 jobs:
-  toc:
-    name: TOC Generator
+  docs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: TOC Generator
-        uses: doctoc/doctoc@v1
-        with:
-          args: 'README.md'
 
-  link-checker:
-    name: Link Checker
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Generate TOC
+        uses: technote-space/toc-generator@v4
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOC_TITLE: "## Table of Contents"
+          COMMIT_MESSAGE: "docs: update TOC"
+
       - name: Link Checker
         uses: lycheeverse/lychee-action@v1
         with:
-          args: --verbose --no-progress './**/*.md'
+          args: --verbose --no-progress './**/*.md' './**/*.html'
           
-  contributors:
-    name: All Contributors
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: All Contributors
-        uses: all-contributors/all-contributors-cli@v6
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          command: generate
-          bot_username: all-contributors[bot]
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
