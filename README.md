@@ -1,21 +1,13 @@
 <div align="center">
-<br />
-<pre>
-  ____        _ _           _             
- / ___|  ___ | (_) ___ ___ | |__   ___ _ __ 
-| |     / _ \| | |/ __/ _ \| '_ \ / _ \ '__|
-| |___ | (_) | | | (_| (_) | |_) |  __/ |   
- \____| \___/|_|_|\___\___/|_.__/ \___|_|   
-</pre>
-<br />
+<h1>👥🖨️🗓️✒️</h1>
 </div>
 
 # Social Printable Calendar Planner
 
-[![Build Status](https://github.com/javi/calendar/actions/workflows/documentation.yml/badge.svg)](https://github.com/javi/calendar/actions/workflows/documentation.yml)
+[![Build Status](https://github.com/JaviLopezG/calendar/actions/workflows/documentation.yml/badge.svg)](https://github.com/JaviLopezG/calendar/actions/workflows/documentation.yml)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-![Version](https://img.shields.io/badge/version-0.0.0-blue)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/javi/calendar/badge)](https://api.securityscorecards.dev/projects/github.com/javi/calendar)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/JaviLopezG/calendar/badge)](https://api.securityscorecards.dev/projects/github.com/JaviLopezG/calendar)
 
 > A social and printable calendar planner.
 
