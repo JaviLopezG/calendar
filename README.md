@@ -67,10 +67,6 @@ graph TD;
     C -->|Stores calendar data| D[Firestore];
 ```
 
-## Contributing
-
-Contributions are welcome! This project uses the [All Contributors](https://allcontributors.org/) specification. Contributions of any kind are welcome!
-
 ## License
 
 This project is licensed under the BSD-3-Clause License - see the [LICENSE](LICENSE) file for details.
