@@ -1,3 +1,4 @@
+
 name: Documentation
 
 on:
@@ -26,9 +27,3 @@ jobs:
         uses: lycheeverse/lychee-action@v1
         with:
           args: --verbose --no-progress './**/*.md' './**/*.html'
-          
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist

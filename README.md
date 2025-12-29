@@ -1,20 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-## Table of Contents
-
-- [Collaborative Annual Planner](#collaborative-annual-planner)
-  - [🚀 Quick Start](#-quick-start)
-  - [✨ Features](#-features)
-  - [📦 Dependencies](#-dependencies)
-  - [📖 Usage](#-usage)
-    - [Architecture](#architecture)
-  - [🗺️ Roadmap](#-roadmap)
-  - [❤️ Contributing](#-contributing)
-  - [📜 License](#-license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-
 <div align="center">
   <img src="logo.png" alt="Calendar Logo" width="200"/>
   <h1>Collaborative Annual Planner</h1>
@@ -22,11 +5,15 @@
   
   <!-- Badges -->
   <p>
-    <a href="https://github.com/javilopezg/calendar/actions/workflows/deploy.yml"><img src="https://github.com/javilopezg/calendar/actions/workflows/deploy.yml/badge.svg" alt="Build Status"></a>
+    <a href="https://github.com/javilopezg/calendar/actions/workflows/documentation.yml"><img src="https://github.com/javilopezg/calendar/actions/workflows/documentation.yml/badge.svg" alt="Build Status"></a>
     <a href="https://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/License-BSD--3--Clause-blue.svg" alt="License"></a>
     <a href="package.json"><img src="https://img.shields.io/github/package-json/v/javilopezg/calendar" alt="Version"></a>
     <a href="https://securityscorecards.dev/viewer/?uri=github.com/javilopezg/calendar"><img src="https://api.securityscorecards.dev/projects/github.com/javilopezg/calendar/badge" alt="OpenSSF Scorecard"></a>
   </p>
+</div>
+
+<div align="center">
+  <img src="screenshot.png" alt="Screenshot of the calendar application"/>
 </div>
 
 ## 🚀 Quick Start
