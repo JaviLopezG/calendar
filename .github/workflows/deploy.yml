@@ -26,3 +26,5 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CALENDAR_YUPS_ME }}'
           channelId: live
           projectId: calendar-yups-me
+        env:
+          FIREBASE_CLI_PREVIEWS: hostingchannels
