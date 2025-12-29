@@ -9,36 +9,35 @@ jobs:
   toc:
     name: TOC Generator
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: TOC Generator
-        uses: technote-space/toc-generator@v4
+        uses: doctoc/doctoc@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TOC_TITLE: "## Table of Contents"
-          TARGET_PATHS: "README.md"
+          args: 'README.md'
 
-  links:
+  link-checker:
     name: Link Checker
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Link Checker
         uses: lycheeverse/lychee-action@v1
         with:
-          args: --verbose --no-progress './**/*.md' './**/*.html'
-          token: ${{ secrets.GITHUB_TOKEN }}
-
+          args: --verbose --no-progress './**/*.md'
+          
   contributors:
     name: All Contributors
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: All Contributors
-        uses: all-contributors/action@v1.0.0
+        uses: all-contributors/all-contributors-cli@v6
         with:
+          command: generate
+          bot_username: all-contributors[bot]
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          path: "README.md"
-          commit_message: "docs: update contributors"

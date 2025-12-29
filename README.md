@@ -1,3 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Collaborative Calendar](#collaborative-calendar)
+  - [What is Collaborative Calendar?](#what-is-collaborative-calendar)
+    - [Why is it useful?](#why-is-it-useful)
+  - [✨ Features](#-features)
+  - [🚀 Quick Start](#-quick-start)
+    - [Installation](#installation)
+    - [Docker](#docker)
+  - [🛠️ Dependencies](#-dependencies)
+  - [📖 Usage](#-usage)
+  - [🗺️ Roadmap](#-roadmap)
+  - [🤖 Automation](#-automation)
+  - [🤝 Contributing](#-contributing)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 <p align="center">
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
