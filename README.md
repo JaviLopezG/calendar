@@ -82,6 +82,12 @@ graph TD
 ## 🗺️ Roadmap
 
 This is a weekend project, and future development depends on community interest. If you have any suggestions or feedback, please feel free to open an issue or submit a pull request.
+- [ ] List all calendars the user owns
+- [ ] Rediseign columns width for diferent media
+- [ ] Change the URL to set the id
+- [ ] Open by default the last calendar in wich the user was active
+- [ ] Create new button
+- [ ] Don't change event dates on year change
 
 ## ❤️ Contributing
 
