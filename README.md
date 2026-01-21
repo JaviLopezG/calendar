@@ -88,10 +88,14 @@ This is a weekend project, and future development depends on community interest.
 - [ ] Open by default the last calendar in wich the user was active
 - [ ] Create new button
 - [ ] Don't change event dates on year change
+- [ ] Set optional time for events 
+- [ ] Strike oyt past events 
+- [ ] Show current month as first od the second column
+- [ ] Allow go forward and backward over shown months
 
 ## ❤️ Contributing
 
-Suggestions, help, and feedback are welcome!
+Suggestions, help, and feedback are welcome! You can mail me or use discussions tab.
 
 ## 📜 License
 
